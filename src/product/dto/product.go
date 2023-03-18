@@ -1,5 +1,6 @@
 package dto
 
+// custom dto product req and resp models
 type CreateProduct struct {
 	Name         string  `json:"name"`
 	Price        float64 `json:"price"`

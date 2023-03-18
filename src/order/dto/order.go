@@ -2,6 +2,7 @@ package dto
 
 import "time"
 
+// custom dto req and resp models
 type CreateOrder struct {
 	OrderName string    `json:"name"`
 	Product   []Product `json:"product"`

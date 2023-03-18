@@ -17,6 +17,7 @@ var Err = errorutils.NewErr()
 
 type ProductService struct{}
 
+// product create service function
 func (ps *ProductService) CreateProduct(c context.Context, req dto.CreateProduct) (dto.ProductHTTPResponse, *errorutils.Error) {
 
 	var product repository.Product
@@ -46,13 +47,13 @@ func (ps *ProductService) CreateProduct(c context.Context, req dto.CreateProduct
 
 }
 
+// get product service func
 func (ps *ProductService) GetProductByID(c context.Context, id string) (dto.GetProductHTTPResponse, *errorutils.Error) {
 
 	ctx, cancelFunc := context.WithCancel(c)
 	defer cancelFunc()
 
 	product_id, _ := primitive.ObjectIDFromHex(id)
-
 	product, err := ProductRepository.FindProductByID(ctx, product_id)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -77,13 +78,13 @@ func (ps *ProductService) GetProductByID(c context.Context, id string) (dto.GetP
 	}, nil
 }
 
+// get product list func
 func (ps *ProductService) GetProductList(c context.Context) (dto.ProductListHTTPResponse, *errorutils.Error) {
 
 	ctx, cancelFunc := context.WithCancel(c)
 	defer cancelFunc()
 
 	var product_resp []dto.GetProductResponse
-
 	products, err := ProductRepository.FindProductList(ctx)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -112,6 +113,7 @@ func (ps *ProductService) GetProductList(c context.Context) (dto.ProductListHTTP
 	}, nil
 }
 
+// update products service
 func (ps *ProductService) UpdateProduct(c context.Context, id string, req dto.UpdateProduct) (dto.UpdateProductHTTPResponse, *errorutils.Error) {
 
 	productUpdate := dto.UpdateProduct{

@@ -10,6 +10,7 @@ import (
 var productController = new(product.ProductController)
 var orderController = new(orders.OrderController)
 
+// service routes
 func ProductRoutes(r *gin.Engine) {
 
 	product := r.Group("/product")

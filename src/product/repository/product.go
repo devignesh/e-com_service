@@ -11,8 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// mongo db product collection
 var productRepo = database.Db().Database("josh-com").Collection("product")
 
+// product data schemas
 type Product struct {
 	ID           primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	Name         string             `json:"name" bson:"name,omitempty"`
@@ -24,6 +26,7 @@ type Product struct {
 	IsDeleted    bool               `json:"is_deleted" bson:"is_deleted"`
 }
 
+// create product functions
 func (p *Product) CreateProduct(ctx context.Context, product Product) (interface{}, error) {
 
 	r, err := productRepo.InsertOne(ctx, product)
@@ -34,6 +37,7 @@ func (p *Product) CreateProduct(ctx context.Context, product Product) (interface
 	return r.InsertedID, nil
 }
 
+// get product by id
 func (p *Product) FindProductByID(ctx context.Context, id primitive.ObjectID) (Product, error) {
 
 	var product Product
@@ -46,6 +50,7 @@ func (p *Product) FindProductByID(ctx context.Context, id primitive.ObjectID) (P
 	return product, nil
 }
 
+// get product by filter
 func (p *Product) FindProductByBson(ctx context.Context, filter bson.D) (Product, error) {
 
 	var product Product
@@ -58,6 +63,7 @@ func (p *Product) FindProductByBson(ctx context.Context, filter bson.D) (Product
 	return product, nil
 }
 
+// get product list
 func (p *Product) FindProductList(ctx context.Context) ([]Product, error) {
 
 	var product []Product
@@ -85,6 +91,7 @@ func (p *Product) FindProductList(ctx context.Context) ([]Product, error) {
 	return product, nil
 }
 
+// update products
 func (p *Product) UpdateProduct(ctx context.Context, req dto.UpdateProduct) (Product, error) {
 
 	var product Product
@@ -137,6 +144,7 @@ func (p *Product) UpdateProduct(ctx context.Context, req dto.UpdateProduct) (Pro
 	return product, nil
 }
 
+// update product availablity
 func (p *Product) UpdateProductAvailability(ctx context.Context, prod_id string, req bool) (Product, error) {
 
 	var product Product

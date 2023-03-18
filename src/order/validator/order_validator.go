@@ -13,9 +13,10 @@ import (
 )
 
 var Err = errorsutils.NewErr()
-
 var ProductRepository = new(product.Product)
 
+// custom validators
+// validating orders
 func validateStatus(status string) bool {
 
 	switch status {

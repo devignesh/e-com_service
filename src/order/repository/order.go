@@ -11,8 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// mongo db colletion
 var OrderRepo = database.Db().Database("josh-com").Collection("order")
 
+// order schema
 type Order struct {
 	ID           primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	Product      []dto.Product      `json:"product" bson:"product"`
@@ -25,6 +27,7 @@ type Order struct {
 	IsDeleted    bool               `json:"is_deleted" bson:"is_deleted"`
 }
 
+// create new order
 func (o *Order) CreateOrder(ctx context.Context, order Order) (interface{}, error) {
 
 	r, err := OrderRepo.InsertOne(ctx, order)
@@ -35,6 +38,7 @@ func (o *Order) CreateOrder(ctx context.Context, order Order) (interface{}, erro
 	return r.InsertedID, nil
 }
 
+// find a oder by its id
 func (o *Order) FindOrderByID(ctx context.Context, id primitive.ObjectID) (Order, error) {
 
 	var order Order
@@ -47,6 +51,7 @@ func (o *Order) FindOrderByID(ctx context.Context, id primitive.ObjectID) (Order
 	return order, nil
 }
 
+// find order by filter
 func (o *Order) FindOrderByBson(ctx context.Context, filter bson.D) (Order, error) {
 
 	var order Order
@@ -59,6 +64,7 @@ func (o *Order) FindOrderByBson(ctx context.Context, filter bson.D) (Order, erro
 	return order, nil
 }
 
+// update order
 func (o *Order) UpdateOrder(ctx context.Context, req dto.UpdateOrder, date time.Time) (Order, error) {
 
 	var order Order

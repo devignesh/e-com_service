@@ -20,6 +20,7 @@ var ProductRepository = new(products.Product)
 
 var Err = errorsutils.NewErr()
 
+// create order service function
 func (os *OrderService) CreateOrder(c context.Context, req dto.CreateOrder) (dto.CreateOrderHTTPResponse, *errorsutils.Error) {
 
 	var order orders.Order
@@ -68,9 +69,7 @@ func (os *OrderService) CreateOrder(c context.Context, req dto.CreateOrder) (dto
 			}
 
 			ordervalues := ProductID.Price * float64(product.Quantity)
-
 			order.OrderValue += ordervalues
-
 			order.Product = append(order.Product, prod)
 		}
 
@@ -95,8 +94,6 @@ func (os *OrderService) CreateOrder(c context.Context, req dto.CreateOrder) (dto
 		return dto.CreateOrderHTTPResponse{}, &Err.INTERNAL_ERR
 	}
 
-	fmt.Println("\n order", orderID)
-
 	response := dto.CreateOrderResponse{
 		ID: orderID.(primitive.ObjectID).Hex(),
 	}
@@ -108,6 +105,7 @@ func (os *OrderService) CreateOrder(c context.Context, req dto.CreateOrder) (dto
 	}, nil
 }
 
+// get order by its id function
 func (os *OrderService) GetOrderByID(c context.Context, id string) (dto.GetOrderHTTPResponse, *errorsutils.Error) {
 
 	ctx, cancelFunc := context.WithCancel(c)
@@ -182,6 +180,7 @@ func (os *OrderService) GetOrderByID(c context.Context, id string) (dto.GetOrder
 
 }
 
+// update order function
 func (os *OrderService) UpdateOrder(c context.Context, id string, req dto.UpdateOrder) (dto.UpdateOrderHTTPResponse, *errorsutils.Error) {
 
 	OrderUpdate := dto.UpdateOrder{

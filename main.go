@@ -13,6 +13,8 @@ import (
 )
 
 func main() {
+
+	//load the env file
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("error loading .env file")
@@ -31,12 +33,13 @@ func main() {
 	startServer(port, r)
 }
 
+// route setup function
 func setupRoutes(r *gin.Engine) {
 	routes.ProductRoutes(r)
 }
 
+// db setup func
 func setupDatabase() {
-	//sets up database
 	database.Db()
 
 }

@@ -12,6 +12,7 @@ type Err struct {
 	OBJ_NOT_FOUND Error
 }
 
+// custom error types
 type Invalid_Error struct {
 	PRODUCT_ID   Error
 	PRODUCTNAME  Error
@@ -23,6 +24,7 @@ type Invalid_Error struct {
 	ORDERSTATUS  Error
 }
 
+// common error response
 type InvalidErrorResponse struct {
 	Code        int             `json:"code"`
 	Message     string          `json:"message"`
@@ -49,6 +51,7 @@ type Error struct {
 	Message string
 }
 
+// custom error handler
 func ErrorHandler(ctx *gin.Context, err interface{}) {
 
 	if e, ok := err.(*Error); ok {
@@ -97,6 +100,7 @@ func ErrorHandler(ctx *gin.Context, err interface{}) {
 
 }
 
+// errors
 func NewErr() Err {
 	e := Err{
 		INTERNAL_ERR: Error{

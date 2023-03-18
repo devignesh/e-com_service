@@ -17,10 +17,10 @@ var Err = errorsutils.NewErr()
 
 type ProductController struct{}
 
+// product controller create product
 func (productController *ProductController) CreateProduct(ctx *gin.Context) {
 
 	var r map[string]interface{}
-
 	var req dto.CreateProduct
 
 	if err := ctx.BindJSON(&r); err != nil {
@@ -49,6 +49,7 @@ func (productController *ProductController) CreateProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// get product controller
 func (productController *ProductController) GetProductByID(ctx *gin.Context) {
 
 	//product id
@@ -70,6 +71,7 @@ func (productController *ProductController) GetProductByID(ctx *gin.Context) {
 
 }
 
+// get product list contrller
 func (productController *ProductController) GetProductList(ctx *gin.Context) {
 
 	response, e := productService.GetProductList(ctx)
@@ -81,10 +83,10 @@ func (productController *ProductController) GetProductList(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// update produt
 func (productController *ProductController) UpdateProduct(ctx *gin.Context) {
 
 	product_id := ctx.Param("id")
-
 	var req dto.UpdateProduct
 
 	if err := ctx.BindJSON(&req); err != nil {

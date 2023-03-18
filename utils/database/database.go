@@ -16,6 +16,7 @@ import (
 var once sync.Once
 var mongoClient *mongo.Client
 
+// mongo conn
 func Db() *mongo.Client {
 	once.Do(func() {
 

@@ -18,10 +18,10 @@ type OrderController struct{}
 var Err = errorsutils.NewErr()
 var orderService = new(service.OrderService)
 
+// create order contrller
 func (orderController *OrderController) CreateOrder(ctx *gin.Context) {
 
 	var r map[string]interface{}
-
 	var req dto.CreateOrder
 
 	if err := ctx.BindJSON(&r); err != nil {
@@ -50,6 +50,7 @@ func (orderController *OrderController) CreateOrder(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, response)
 }
 
+// get order by Id controller
 func (orderController *OrderController) GetOrderByID(ctx *gin.Context) {
 
 	//order id
@@ -71,6 +72,7 @@ func (orderController *OrderController) GetOrderByID(ctx *gin.Context) {
 
 }
 
+// update order controller
 func (orderController *OrderController) UpdateOrder(ctx *gin.Context) {
 
 	Order_id := ctx.Param("id")
