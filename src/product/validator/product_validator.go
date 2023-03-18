@@ -13,6 +13,7 @@ import (
 
 var Err = errorsutils.NewErr()
 
+// common validators for product service
 func validateCategory(category string) bool {
 	switch category {
 	case "premium":
