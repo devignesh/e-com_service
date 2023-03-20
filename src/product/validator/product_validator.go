@@ -97,21 +97,27 @@ func UpdateProductValidator(ctx context.Context, req dto.UpdateProduct) interfac
 
 	var invalidErrs []*errorsutils.Error
 
-	if len(req.Name) == 0 || len(req.Name) > 255 {
-		invalidErrs = append(invalidErrs, &Err.INVALID_ERR.PRODUCTNAME)
+	if len(req.Name) > 0 {
+		if len(req.Name) == 0 || len(req.Name) > 255 {
+			invalidErrs = append(invalidErrs, &Err.INVALID_ERR.PRODUCTNAME)
 
+		}
 	}
 
-	if !(req.Availability || !req.Availability) {
-		invalidErrs = append(invalidErrs, &Err.INVALID_ERR.AVAILABILITY)
+	if req.Availability != true || req.Availability != false {
+		if !(req.Availability || !req.Availability) {
+			invalidErrs = append(invalidErrs, &Err.INVALID_ERR.AVAILABILITY)
+		}
 	}
 
 	if valid := validateCategory(req.Category); !valid {
 		invalidErrs = append(invalidErrs, &Err.INVALID_ERR.CATEGORY)
 	}
 
-	if req.Price == 0 {
-		invalidErrs = append(invalidErrs, &Err.INVALID_ERR.PRICE)
+	if req.Price != -0 {
+		if req.Price == 0 {
+			invalidErrs = append(invalidErrs, &Err.INVALID_ERR.PRICE)
+		}
 	}
 
 	if len(invalidErrs) != 0 {
