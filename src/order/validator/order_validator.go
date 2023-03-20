@@ -106,13 +106,13 @@ func GetOrderValidator(ctx context.Context, id string) interface{} {
 	return nil
 }
 
-func UpdateOrderValidator(ctx context.Context, req dto.UpdateOrder) interface{} {
+func UpdateOrderValidator(ctx context.Context, id string, req dto.UpdateOrder) interface{} {
 
 	var invalidErrs []*errorsutils.Error
 
 	var orderrepo = new(order.Order)
 
-	order_id, err := primitive.ObjectIDFromHex(req.ID)
+	order_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		invalidErrs = append(invalidErrs, &Err.INVALID_ERR.ORDER_ID)
 		return invalidErrs
