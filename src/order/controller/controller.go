@@ -84,7 +84,7 @@ func (orderController *OrderController) UpdateOrder(ctx *gin.Context) {
 		return
 	}
 
-	errs := validator.UpdateOrderValidator(ctx, req)
+	errs := validator.UpdateOrderValidator(ctx, Order_id, req)
 	if errs != nil {
 		errorsutils.ErrorHandler(ctx, errs)
 		return
