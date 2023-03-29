@@ -139,7 +139,7 @@ func (ps *ProductService) UpdateProduct(c context.Context, id string, req dto.Up
 	}
 
 	return dto.UpdateProductHTTPResponse{
-		Status:  201,
+		Status:  200,
 		Message: "The product data is updated successfully for given id.",
 		Data:    response,
 	}, nil
