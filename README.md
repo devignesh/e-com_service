@@ -74,7 +74,7 @@ add sample example result
         Response:
 
             {
-                "status": 201,
+                "status": 200,
                 "message": "The product data is updated successfully for given id.",
                 "data": {
                     "id": "641840cfd74c6eecc15a2943",
@@ -210,7 +210,7 @@ add sample example result
         Response:
 
             {
-                "status": 201,
+                "status": 200,
                 "message": "The Order data is updated successfully for given id.",
                 "data": {
                     "id": "6418463ae3f4077480cf2f69",
