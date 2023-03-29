@@ -210,7 +210,7 @@ func (os *OrderService) UpdateOrder(c context.Context, id string, req dto.Update
 	}
 
 	return dto.UpdateOrderHTTPResponse{
-		Status:  201,
+		Status:  200,
 		Message: "The Order data is updated successfully for given id.",
 		Data:    response,
 	}, nil
